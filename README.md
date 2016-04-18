@@ -4,12 +4,11 @@ Email validation service with RESTish API
 
 ## Goal
 
-Often it's not enough to validate just format of email.
-Even if format is Ok, you may fail to send message to it.
-You can have invalid domain, without MX record.
-Or user can be overquota. Or already deleted.
+Often it's not enough to just validate format of email.
+Even if format is Ok, you may fail to send a message to it.
+You can have an invalid domain, without MX record, a user can be over quota. Or already deleted.
 
-And Pechkin helps you to find out about it befor you send message.
+And Pechkin helps you to find out about it before you send a message.
 
 ## Usage
 Get it with:
@@ -35,7 +34,7 @@ Or with callback:
 	> curl -i "http://127.0.0.1:8080/?email=invalid@email.com&callback=$URL"
 	HTTP/1.1 201 Created
 
-And you will get POST to $URL with json data, ex.:
+And you will get POST to $URL with JSON data, ex.:
 
 	{
 		"email": "invalid@email.com",
