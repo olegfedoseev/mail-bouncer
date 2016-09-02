@@ -2,6 +2,7 @@
 
 Email validation service with RESTish API
 
+[![Go Report Card](https://goreportcard.com/badge/github.com/olegfedoseev/mail-bouncer)](https://goreportcard.com/report/github.com/olegfedoseev/mail-bouncer)
 [![](https://images.microbadger.com/badges/image/olegfedoseev/mail-bouncer.svg)](http://microbadger.com/images/olegfedoseev/mail-bouncer "Get your own image badge on microbadger.com")
 
 ## Goal
