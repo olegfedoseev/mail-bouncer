@@ -14,7 +14,7 @@ import (
 )
 
 // MailHandler implements simple RESTish API and holds host and from address
-// for validation proccess
+// for validation process
 type MailHandler struct {
 	Hostname string
 	From     string
@@ -32,7 +32,7 @@ type apiResponse struct {
 	Email       string `json:"email"`
 	IsValid     bool   `json:"is_valid"`
 	Description string `json:"description"`
-	Error       string `json:"error",omitempty`
+	Error       string `json:"error"`
 }
 
 // ServerHTTP is handler for RESTish API
