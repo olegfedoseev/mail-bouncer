@@ -12,11 +12,18 @@ And mail-bouncer helps you to find out about it before you send a message.
 
 ## Usage
 Get it with:
-`go get github.com/olegfedoseev/mail-bouncer`
+
+	go get github.com/olegfedoseev/mail-bouncer
 
 Start it with:
-`mail-bouncer --listen=<listen> --host=<host> --from=<from>`
+
+	mail-bouncer --listen=<listen> --host=<host> --from=<from>
+	
 You have to specify valid hostname for "host" (see HELO command in SMTP) and valid email for "from" (see MAIL command in SMTP)
+
+Or using Docker:
+
+	docker run -d -p 80 olegfedoseev/mail-bouncer
 
 Then all you need is simple GET:
 
