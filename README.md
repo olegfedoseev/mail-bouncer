@@ -2,6 +2,8 @@
 
 Email validation service with RESTish API
 
+[![](https://images.microbadger.com/badges/image/olegfedoseev/mail-bouncer.svg)](http://microbadger.com/images/olegfedoseev/mail-bouncer "Get your own image badge on microbadger.com")
+
 ## Goal
 
 Often it's not enough to just validate format of email.
