@@ -14,10 +14,15 @@ func main() {
 mail-bouncer is email validation service with simple RESTish API.
 
 Example:
-	> curl -i "http://127.0.0.1:8080/?email=invalid@email.com"
-	HTTP/1.1 417 Expectation Failed
+	> curl -i ":8080/?email=invalid@email.com"
+	HTTP/1.1 200 OK
 
-	RCPT failed for invalid@email.com: 554 5.7.1 Helo command rejected
+	{
+		"email":"invalid@email.com",
+		"is_valid":false,
+		"description":"MX server is unreachable",
+		"error":"can't connect to email.com: ...."
+	}
 
 	> curl -i "http://127.0.0.1:8080/?email=valid@gamil.com"
 	HTTP/1.1 200 OK

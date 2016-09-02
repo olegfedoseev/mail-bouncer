@@ -41,6 +41,12 @@ type apiResponse struct {
 // Example: POST /?email=test@email.com&callback=http://test.com/emailCallback
 // Result wiil be in bool field "is_valid"
 func (handler *MailHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Access-Control-Allow-Origin", "*")
+	w.Header().Set("Access-Control-Allow-Methods", "POST, GET")
+	w.Header().Set("Access-Control-Allow-Headers", "Content-Type, Cache-Control")
+	w.Header().Set("Access-Control-Allow-Credentials", "true")
+	w.Header().Set("Content-Type", "application/json; charset=utf-8")
+
 	email := r.URL.Query().Get("email")
 	if email == "" {
 		w.WriteHeader(http.StatusBadRequest)
