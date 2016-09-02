@@ -7,8 +7,8 @@ Email validation service with RESTish API
 
 ## Goal
 
-Often it's not enough to just validate format of email.
-Even if format is Ok, you may fail to send a message to it.
+Often it's not enough to just validate a format of an email.
+Even if a format is Ok, you may fail to send a message to it.
 You can have an invalid domain, without MX record, a user can be over quota. Or already deleted.
 
 And mail-bouncer helps you to find out about it before you send a message.
@@ -21,7 +21,7 @@ Get it with:
 Start it with:
 
 	mail-bouncer --listen=<listen> --host=<host> --from=<from>
-	
+
 You have to specify valid hostname for "host" (see HELO command in SMTP) and valid email for "from" (see MAIL command in SMTP)
 
 Or using Docker:
