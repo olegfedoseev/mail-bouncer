@@ -9,9 +9,9 @@ import (
 )
 
 func main() {
-	usage := `pechkin 1.0
+	usage := `mail-bouncer 1.0
 
-Pechkin is email validation service with simple RESTish API.
+mail-bouncer is email validation service with simple RESTish API.
 
 Example:
 	> curl -i "http://127.0.0.1:8080/?email=invalid@email.com"
@@ -33,8 +33,8 @@ Example:
 	}
 
 Usage:
-	pechkin [options]
-	pechkin -v | -h
+	mail-bouncer [options]
+	mail-bouncer -v | -h
 
 Options:
   -h --help         Show this screen.
@@ -43,7 +43,7 @@ Options:
   --host=<host>     Hostname for HELO command
   --from=<from>     Email address for MAIL command
 `
-	args, err := docopt.Parse(usage, nil, true, "pechkin 1.0", false)
+	args, err := docopt.Parse(usage, nil, true, "mail-bouncer 1.0", false)
 	if err != nil {
 		log.Fatal(err)
 	}

@@ -1,11 +1,14 @@
 package main
 
 import (
+	"fmt"
 	"io/ioutil"
 	"net/http"
 	"net/http/httptest"
 	"testing"
+	"time"
 
+	log "github.com/Sirupsen/logrus"
 	"github.com/stretchr/testify/assert"
 )
 
@@ -17,11 +20,10 @@ func TestValidation(t *testing.T) {
 		code int
 		body string
 	}{
-		{"/?email=o.fedoseev@office.ngs.ru", 200, ""},
+		{"/?email=oleg.fedoseev@me.com", 200, ""},
 		{"/?invalid=reqeust", 400, ""},
-		{"/?email=invalid", 417, "invalid email: mail: missing phrase\n"},
-		{"/?email=invalid@example.com", 417, "MX lookup failed for example.com"},
-		{"/?email=qwekfksla@gmail.com", 417, "RCPT failed for qwekfksla@gmail.com: 550 5.1.1"},
+		{"/?email=invalid", 200, "invalid email: mail: missing phrase"},
+		{"/?email=invalid@example.com", 200, "MX lookup failed for example.com"},
 	}
 	for _, test := range tests {
 		req, _ := http.NewRequest("GET", test.url, nil)
@@ -34,6 +36,7 @@ func TestValidation(t *testing.T) {
 }
 
 func TestValidationWithCallback(t *testing.T) {
+	log.SetLevel(log.DebugLevel)
 	handler := http.Handler(NewHandler("localhost", "tester@example.com"))
 	callbackBody := make(chan string, 1)
 
@@ -51,18 +54,18 @@ func TestValidationWithCallback(t *testing.T) {
 		body string
 	}{
 		{
-			"/?email=o.fedoseev@office.ngs.ru&callback=" + ts.URL,
+			"/?email=oleg.fedoseev@me.com&callback=" + ts.URL,
 			201,
-			`{"email":"o.fedoseev@office.ngs.ru","error":null,"valid":true}` + "\n",
+			`"is_valid":true`,
 		},
 		{
-			"/?email=rtrty@rambler.ru&callback=" + ts.URL,
+			fmt.Sprintf("/?email=invalid-email%d@gmail.com&callback=%s", time.Now().Unix(), ts.URL),
 			201,
-			`{"email":"rtrty@rambler.ru","error":"RCPT failed for rtrty@rambler.ru: 554 5.7.1 Helo command rejected","valid":false}` + "\n",
+			`"is_valid":false`,
 		},
 	}
 	for _, test := range tests {
-		req, _ := http.NewRequest("GET", test.url, nil)
+		req, _ := http.NewRequest("POST", test.url, nil)
 		recorder := httptest.NewRecorder()
 		handler.ServeHTTP(recorder, req)
 
